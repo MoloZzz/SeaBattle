@@ -12,7 +12,6 @@ server.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}/`);
 });
 
-
 app.use(express.static(path.join(__dirname, '../client')));
 
 app.get('/', (req, res) => {
@@ -29,13 +28,41 @@ const users = [];
 const connections = [];
 
 
-io.sockets.on('connection',function(socket){
+io.sockets.on('connection', function(socket){
   console.log('Connected');
   connections.push(socket);
 
-  socket.on('disconnect', function(){
-    connections.slice(connections.indexOf(socket), 1);
-    console.log('disconnected');
+  socket.on('add user', function (username) {
+    let existingUser = null;
+
+    users.forEach(user => {
+      if (user.id === socket.id) {
+        existingUser = user;
+      }
+    });
+
+    if (existingUser) {
+      console.log('Користувачу ', existingUser.username, ' оновлено нік:', username);
+      existingUser.username = username;
+    } else {
+      const newUser = {
+        id: socket.id,
+        username: username,
+      };
+
+      users.push(newUser);
+
+      console.log('Доданий новий користувач:', newUser.username);
+    }
+  });
+
+  socket.on('disconnect', function () {
+    connections.splice(connections.indexOf(socket), 1);
+
+    const disconnectedUser = users.find(user => user.id === socket.id);
+    if (disconnectedUser) {
+      users.splice(users.indexOf(disconnectedUser), 1);
+    } 
+    console.log('Disconnected'); 
   });
 });
-

@@ -10,11 +10,25 @@
 </head>
 <body>
     
+    <form id = "enterName"> 
+        <p>Ім'я</p>
+        <input type="text" title="Введіть ваше ім'я" id = "userName">
+        <button type="submit">підтвердити</button>
+    </form>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script>
         $(function(){
-          const socket = io.connect();
+            const socket = io.connect();
+
+            const $formEnterName = document.getElementById('enterName');
+            const $UserName = document.getElementById('userName');
+            
+            $formEnterName.addEventListener('submit', (event) => {
+                event.preventDefault();
+                socket.emit('add user', $UserName.value);
+                $formEnterName.reset();
+            });
         });
       </script>
 </body>
