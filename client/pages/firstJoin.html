@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../static/icon.png" type="image/png">
     <link rel="stylesheet" href="../styles/firstJoin.css" type="text/css">
-    <script src="../scripts/firstJoin.js"></script>
+    <!-- <script src="../scripts/firstJoin.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <title>SeaBattle</title>
 </head>
 <body>
     
-    <form id = "enterName"> 
+    <form id="enterName"> 
         <p>Ім'я</p>
         <input type="text" title="Введіть ваше ім'я" id = "userName">
         <button type="submit">підтвердити</button>
     </form>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script>
         $(function(){
@@ -25,6 +26,7 @@
             const $UserName = document.getElementById('userName');
             
             $formEnterName.addEventListener('submit', (event) => {
+                console.log($UserName.value)
                 event.preventDefault();
                 socket.emit('add user', $UserName.value);
                 $formEnterName.reset();
