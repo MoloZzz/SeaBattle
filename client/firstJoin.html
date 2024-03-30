@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./styles/icon.png" type="image/png">
+    <link rel="stylesheet" href="./styles/firstJoin.css" type="text/css">
+    <script src="./scripts/firstJoin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>SeaBattle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <script src="./scripts/addNewPlayer.js"></script>
+</head>
+
+<body style="background-color: rgba(144, 238, 238, 0.362);">
+    <div class="container mt-3">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" id="loginTab" data-bs-toggle="tab" href="#login">Вхід</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="registrationTab" data-bs-toggle="tab" href="#registration">Реєстрація</a>
+          </li>
+        </ul>
+        <div class="tab-content mt-3">
+          <div class="tab-pane fade show active" id="login">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Заходьте в свій акаунт і приєднуйтесь до гри!</h5>
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Вхід</h5>
+                          <form id="loginForm">
+                            <div class="mb-3">
+                              <label for="loginName" class="form-label">Ім'я</label>
+                              <input type="text" class="form-control" id="loginName" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="loginPassword" class="form-label">Пароль</label>
+                              <input type="password" class="form-control" id="loginPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id= "loginSubmit">Увійти</button>
+                          </form>
+                        </div>
+                      </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="registration">
+            
+            <div class="card mt-3">
+              <div class="card-body">
+                <h5 class="card-title">Тут ви можете зареєструватись за 10 секунд!</h5>
+                
+                    <div class="card mt-3">
+                        <div class="card-body">
+                          <h5 class="card-title">Реєстрація</h5>
+                          <form id="registrationForm">
+                            <div class="mb-3">
+                              <label for="registrationName" class="form-label">Ім'я</label>
+                              <input type="text" class="form-control" id="registrationName" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="registrationPassword" class="form-label">Пароль</label>
+                              <input type="password" class="form-control" id="registrationPassword" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="confirmPassword" class="form-label">Підтвердження паролю</label>
+                              <input type="password" class="form-control" id="confirmPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-success" id= "registrationSubmit">Зареєструватися</button>
+                          </form>
+                        </div>
+                      </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <script src="/socket.io/socket.io.js"></script>
+      
+</body>
+</html>
+
+        
+        
+        
+        

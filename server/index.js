@@ -1,27 +1,46 @@
+require('dotenv').config();
 const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-
-const port = 7777; 
-
-server.listen(port, () => {
-  console.log(`Сервер запущено на порті ${port}`);
-  console.log(`Server is running at http://localhost:${port}/`);
-});
+const sequelize = require('./DataBase/initSequelize');
+const router = require('./routers/PlayerRouter')
+const cors = require('cors');
+const port = process.env.PORT || 8888; 
 
 app.use(express.static(path.join(__dirname, '../client')));
+app.use(cors());
+app.use(express.json());
+app.use('/api', router);
+
 
 app.get('/', (req, res) => {
-  const filePath = path.join(__dirname, '../client/pages/firstJoin.html');
+  const filePath = path.join(__dirname, '../client/firstJoin.html');
   if (fs.existsSync(filePath)) {
     res.sendFile(filePath);
   } else {
     res.status(404).send('File not found');
   }
 });
+
+const start = async () =>{
+  try{
+      await sequelize.authenticate();
+      await sequelize.sync();
+      app.listen(port, () => {
+          console.log(`Server started on port ${port}`);
+          console.log(`Server is running at http://localhost:${port}/`);
+      })
+  
+  }catch(e){
+      console.log(e);
+  }
+}
+
+start();
+
 
 
 const users = [];
